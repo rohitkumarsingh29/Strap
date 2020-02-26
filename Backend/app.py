@@ -1,8 +1,9 @@
 import sys
 import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
+print(dir_path)
 # insert at 1, 0 is the script path (or '' in REPL)
-sys.path.insert(1, dir_path+'/projectenv/Lib/site-packages')
+sys.path.insert(1, dir_path+'\projectenv\Lib\site-packages')
 
 from flask import Flask, request,jsonify
 from flask_cors import CORS, cross_origin
