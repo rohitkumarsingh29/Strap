@@ -1,26 +1,39 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, jsonify, request
+from flask_restful import Resource, Api
 import psycopg2
 
 # Connect to the database
-db = 'host=10.17.xx.xxx  dbname=test_0 user=test_0 password=NeverShareYourPassword'
-conn = psycopg2.connect(db)
-cur = conn.cursor()
+# db = 'host=10.17.xx.xxx  dbname=test_0 user=test_0 password=NeverShareYourPassword'
+# conn = psycopg2.connect(db)
+# cur = conn.cursor()
 
 app = Flask(__name__)
+api = Api(app)
 
+class Hello(Resource):
 
-@app.route("/")
-def root():
-    cur.execute(
-    """
-        SELECT * FROM badges
-        ORDER BY random()
-        LIMIT 25
-    """)
-    rows = cur.fetchall()
+    def get(self):
+        return jsonify({'message': 'hello world'})
 
-    return render_template(r"C:\Users\Saumya\Desktop\DBMS Project\Base.html", rows=rows)
+    def post(self):
+        data = request.get_json()
+        return jsonify({'data':data}), 201
 
-
-if __name__ == "__main__":
-    app.run(host="localhost", port=5001, debug=True)
+# another resource to calculate the square of a number 
+class Square(Resource): 
+  
+    def get(self, num): 
+  
+        return jsonify({'square': num**2}) 
+  
+  
+# adding the defined resources along with their corresponding urls 
+api.add_resource(Hello, '/') 
+api.add_resource(square, '/square/<int:num>') 
+  
+# driver function 
+if __name__ == '__main__': 
+  
+    app.run(debug = True) 
+# if __name__ == "__main__":
+#     app.run(host="localhost", port=5001, debug=True)
