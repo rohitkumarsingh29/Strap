@@ -1,5 +1,12 @@
-from flask import Flask, jsonify, request
+import sys
+# insert at 1, 0 is the script path (or '' in REPL)
+sys.path.insert(1, r'C:\Users\Saumya\Desktop\Strap\Backend\projectenv\Lib\site-packages')
+
+from flask import Flask, request
+from flask_cors import CORS, cross_origin
 from flask_restful import Resource, Api
+from json import dumps
+from flask_jsonpify import jsonify
 import psycopg2
 
 # Connect to the database
