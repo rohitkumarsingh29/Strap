@@ -8,6 +8,7 @@ import psycopg2
 # cur = conn.cursor()
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 class Hello(Resource):
