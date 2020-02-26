@@ -1,7 +1,7 @@
 import sys
 import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
-print(dir_path)
+#print(dir_path)
 # insert at 1, 0 is the script path (or '' in REPL)
 sys.path.insert(1, dir_path+'\projectenv\Lib\site-packages')
 
@@ -10,7 +10,7 @@ from flask_cors import CORS, cross_origin
 from flask_restful import Resource, Api
 from json import dumps
 # from flask_jsonpify import jsonify
-import psycopg2
+# import psycopg2
 
 # Connect to the database
 # db = 'host=10.17.xx.xxx  dbname=test_0 user=test_0 password=NeverShareYourPassword'
