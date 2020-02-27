@@ -35,6 +35,7 @@ class Hello(Resource):
 
     def post(self):
         data = request.get_json()
+        print(data)
         return jsonify({'data':data}), 201
 
 # another resource to calculate the square of a number 
