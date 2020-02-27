@@ -9,22 +9,29 @@ from flask import Flask, request,jsonify
 from flask_cors import CORS, cross_origin
 from flask_restful import Resource, Api
 from json import dumps
-# from flask_jsonpify import jsonify
-# import psycopg2
+import psycopg2
 
 # Connect to the database
-# db = 'host=10.17.xx.xxx  dbname=test_0 user=test_0 password=NeverShareYourPassword'
-# conn = psycopg2.connect(db)
-# cur = conn.cursor()
-
+db = 'host=10.17.50.134  port=5432 dbname=group_31 user=group_31 password=235-563-714'
+conn = psycopg2.connect(db)
+cur = conn.cursor()
+# print ( conn.get_dsn_parameters(),"\n")
+if(conn):
+            cur.close()
+            conn.close()
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
+postgreSQL_select_Query = "select * from nyse_stocks"
+cur.execute(postgreSQL_select_Query)
+
+row = cur.fetchone()
+
 class Hello(Resource):
 
     def get(self):
-        return jsonify({'message': 'hello world'})
+        return jsonify({'message': row[0]})
 
     def post(self):
         data = request.get_json()
