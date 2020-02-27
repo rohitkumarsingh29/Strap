@@ -1,9 +1,9 @@
 import sys
 import os
-dir_path = os.path.dirname(os.path.realpath(__file__))
+# dir_path = os.path.dirname(os.path.realpath(__file__))
 #print(dir_path)
 # insert at 1, 0 is the script path (or '' in REPL)
-sys.path.insert(1, dir_path+'\projectenv\Lib\site-packages')
+# sys.path.insert(1, dir_path+'\projectenv\Lib\site-packages')
 
 from flask import Flask, request,jsonify
 from flask_cors import CORS, cross_origin
@@ -16,9 +16,7 @@ db = 'host=10.17.50.134  port=5432 dbname=group_31 user=group_31 password=235-56
 conn = psycopg2.connect(db)
 cur = conn.cursor()
 # print ( conn.get_dsn_parameters(),"\n")
-if(conn):
-            cur.close()
-            conn.close()
+
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
@@ -27,7 +25,9 @@ postgreSQL_select_Query = "select * from nyse_stocks"
 cur.execute(postgreSQL_select_Query)
 
 row = cur.fetchone()
-
+if(conn):
+            cur.close()
+            conn.close()
 class Hello(Resource):
 
     def get(self):
