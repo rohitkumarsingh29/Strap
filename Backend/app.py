@@ -47,7 +47,7 @@ class Square(Resource):
 class Price_graph(Resource):
 
     def get(self, name):
-        stock_table_name = name.tolower()+"_us"
+        stock_table_name = name.lower()+"_us"
         postgreSQL_select_Query = "select date,(open+close)/2 as price from "+stock_table_name
         dict_cur.execute(postgreSQL_select_Query)
         row = dict_cur.fetchmany(10)
