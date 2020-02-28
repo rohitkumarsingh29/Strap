@@ -11,6 +11,7 @@ from flask_restful import Resource, Api
 from json import dumps
 import psycopg2
 from psycopg2.extras import RealDictCursor
+import itertools
 
 # Connect to the database
 db = 'host=10.17.50.134  port=5432 dbname=group_31 user=group_31 password=235-563-714'
@@ -59,8 +60,8 @@ class Price_graph(Resource):
 
         return jsonify({
             "label":name+" price graph",
-            "date":date,
-            "price":price
+            "date":list(itertools.chain(*date)),
+            "price":list(itertools.chain(*price))
         })
 
     # def get(self, name):
