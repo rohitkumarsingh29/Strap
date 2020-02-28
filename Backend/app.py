@@ -58,12 +58,13 @@ api.add_resource(Hello, '/')
 api.add_resource(Square, '/square/<int:num>') 
 api.add_resource(Price_graph, '/price/<string:name>') 
 
-if(conn):
-            dict_cur.close()
-            conn.close()
 # driver function 
 if __name__ == '__main__': 
   
     app.run(debug = True) 
 # if __name__ == "__main__":
 #     app.run(host="localhost", port=5001, debug=True)
+
+if(conn):
+            dict_cur.close()
+            conn.close()
