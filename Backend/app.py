@@ -51,7 +51,7 @@ class Price_graph(Resource):
         postgreSQL_select_Query = "select date,(open+close)/2 as price from "+stock_table_name
         dict_cur.execute(postgreSQL_select_Query)
         row = dict_cur.fetchmany(10)
-        return json.dumps(row, indent=2)
+        return json.dumps(row, indent=4, sort_keys=True, default=str)
   
 # adding the defined resources along with their corresponding urls 
 api.add_resource(Hello, '/') 
