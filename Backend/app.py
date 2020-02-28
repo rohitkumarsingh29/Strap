@@ -12,6 +12,7 @@ from json import dumps
 import psycopg2
 from psycopg2.extras import RealDictCursor
 import itertools
+import datetime
 
 # Connect to the database
 db = 'host=10.17.50.134  port=5432 dbname=group_31 user=group_31 password=235-563-714'
@@ -57,10 +58,14 @@ class Price_graph(Resource):
         postgreSQL_select_Query = "select date from "+stock_table_name
         dict_cur.execute(postgreSQL_select_Query)
         date = dict_cur.fetchmany(10)
+        date = list(itertools.chain(*date))
+        date_str = []
+        for i in date:
+            date_str.append(i.strftime('%d/%m/%Y'))
 
         return jsonify({
             "label":name+" price graph",
-            "date":list(itertools.chain(*date)),
+            "date":date_str,
             "price":list(itertools.chain(*price))
         })
 
