@@ -15,7 +15,8 @@ from psycopg2.extras import RealDictCursor
 # Connect to the database
 db = 'host=10.17.50.134  port=5432 dbname=group_31 user=group_31 password=235-563-714'
 conn = psycopg2.connect(db)
-dict_cur = conn.cursor(cursor_factory=RealDictCursor)
+# dict_cur = conn.cursor(cursor_factory=RealDictCursor)
+dict_cur = conn.cursor()
 # print ( conn.get_dsn_parameters(),"\n")
 
 app = Flask(__name__)
@@ -48,10 +49,26 @@ class Price_graph(Resource):
 
     def get(self, name):
         stock_table_name = name.lower()+"_us"
-        postgreSQL_select_Query = "select date,(open+close)/2 as price from "+stock_table_name
+        postgreSQL_select_Query = "select (open+close)/2 as price from "+stock_table_name
         dict_cur.execute(postgreSQL_select_Query)
-        row = dict_cur.fetchmany(10)
-        return json.dumps(row, indent=4, sort_keys=True, default=str)
+        price = dict_cur.fetchmany(10)
+
+        postgreSQL_select_Query = "select date from "+stock_table_name
+        dict_cur.execute(postgreSQL_select_Query)
+        date = dict_cur.fetchmany(10)
+
+        return jsonify({
+            "label":name+" price graph",
+            "date":date,
+            "price":price
+        })
+
+    # def get(self, name):
+    #     stock_table_name = name.lower()+"_us"
+    #     postgreSQL_select_Query = "select date,(open+close)/2 as price from "+stock_table_name
+    #     dict_cur.execute(postgreSQL_select_Query)
+    #     row = dict_cur.fetchmany(10)
+    #     return json.dumps(row, indent=4, sort_keys=True, default=str)
   
 # adding the defined resources along with their corresponding urls 
 api.add_resource(Hello, '/') 
