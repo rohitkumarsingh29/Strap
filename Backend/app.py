@@ -78,7 +78,15 @@ class Sector_details(Resource):
         log.debug('The following data was obtained: %s', data)
         log.debug('The type of data: %s', type(data))
 
-        return data
+        return jsonify({
+          "datasource":[
+              {"ID":"aapl","Company":"Apple","YearOfInception":1984},
+              {"ID":"aaplw","Company":"Appqqle","YearOfInception":1884},
+              {"ID":"aapl","Company":"Apple","YearOfInception":1784},
+              {"ID":"aapql","Company":"ple","YearOfInception":1684},
+              {"ID":"al","Company":"qpple","YearOfInception":1994}
+          ]
+        })
 
     def get(self,sector):
         print(sector)
