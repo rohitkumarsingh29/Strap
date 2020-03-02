@@ -1,0 +1,53 @@
+<h1>Bucket Maker</h1>
+<h2> View-Add-Delete Buckets</h2>
+<mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Tech Bucket
+        </mat-panel-title>
+        <mat-panel-description>
+          Tech bucket stored here          
+        </mat-panel-description>
+      </mat-expansion-panel-header> 
+      <div>
+        <mat-table [dataSource]="datasource" class="mat-elevation-z8">
+            <!-- ID Column -->
+            <ng-container matColumnDef="ID">
+              <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+            </ng-container>
+          
+            <!-- Company Column -->
+            <ng-container matColumnDef="Company">
+              <mat-header-cell *matHeaderCellDef> Company Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            </ng-container>
+          
+            <!-- Year of Inception Column -->
+            <ng-container matColumnDef="Quantity">
+              <mat-header-cell *matHeaderCellDef> Units of Stock </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.qty}} </mat-cell>
+            </ng-container>          
+            <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Misc Bucket
+        </mat-panel-title>
+        <mat-panel-description>
+            miscellaneous stocks added
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>Will display table here</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <br>
+  <br>
+  <button  mat-raised-button class="btn-block" color="accent" (click)="showAnotherBucket()">Add another Bucket</button>
+  

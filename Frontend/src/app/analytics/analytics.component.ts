@@ -79,10 +79,14 @@ export class AnalyticsComponent implements OnInit {
       else return false;
     }
   }
+  dataSource=[];
+  displayedColumns=['ID','Company','YearOfInception'];
   submitDate(){   
     let p:product={day:this.daySelected,month:this.monthSelected,year:this.yearSelected,sector:this.sectorSelected};    
     this.auth.addProduct(p).subscribe((result)=>{
       console.log(result);
+      this.dataSource=result.datasource;
+      console.log(this.dataSource);
     } );
   }
 

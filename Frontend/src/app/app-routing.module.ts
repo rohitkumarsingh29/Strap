@@ -5,6 +5,7 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import {ProfileComponent} from './profile/profile.component';
 import {SectorComponent} from './sector/sector.component';
 import {AnalyticsComponent} from './analytics/analytics.component';
+import {BucketsComponent} from './buckets/buckets.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -12,7 +13,7 @@ const routes: Routes = [
   { path: 'about', component: AboutusComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'sector', component: SectorComponent },
-  { path: 'trends', component: AboutusComponent },
+  { path: 'trends', component: BucketsComponent },
   { path: 'analytics', component: AnalyticsComponent },
 
   
