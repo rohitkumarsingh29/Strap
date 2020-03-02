@@ -13,6 +13,8 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 import itertools
 import datetime
+from flask.logging import create_logger
+import logging
 
 # Connect to the database
 db = 'host=10.17.50.134  port=5432 dbname=group_31 user=group_31 password=235-563-714'
@@ -21,6 +23,7 @@ conn = psycopg2.connect(db)
 dict_cur = conn.cursor()
 
 app = Flask(__name__)
+log = create_logger(app)
 CORS(app)
 api = Api(app)
 
@@ -68,6 +71,27 @@ class Price_graph(Resource):
             "price":list(itertools.chain(*price))
         })
 
+class Sector_details(Resource):
+    
+    def post(self):
+        data = request.get_json()
+        log.debug('The following data was obtained: %s', data)
+        log.debug('The type of data: %s', type(data))
+
+        return data
+
+    def get(self,sector):
+        print(sector)
+        return jsonify({
+          "datasource":[
+              {"ID":"aapl","Company":"Apple","YearOfInception":1984},
+              {"ID":"aaplw","Company":"Appqqle","YearOfInception":1884},
+              {"ID":"aapl","Company":"Apple","YearOfInception":1784},
+              {"ID":"aapql","Company":"ple","YearOfInception":1684},
+              {"ID":"al","Company":"qpple","YearOfInception":1994}
+          ]
+        })
+
     # def get(self, name):
     #     stock_table_name = name.lower()+"_us"
     #     postgreSQL_select_Query = "select date,(open+close)/2 as price from "+stock_table_name
@@ -80,6 +104,7 @@ api.add_resource(Hello, '/')
 api.add_resource(Square, '/square/<int:num>') 
 api.add_resource(Price_graph, '/price/<string:name>') 
 
+api.add_resource(Sector_details,'/analytics')
 # driver function 
 if __name__ == '__main__': 
   
