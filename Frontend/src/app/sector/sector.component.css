@@ -23,6 +23,12 @@
   .active{
     background-color:#BB86FC;
   }
+  table {
+    width: 100%;
+  }
+  .topMargin{
+    margin-top: 10px;
+  }
   /* .mat-card{
     display:flex;
     flex-direction: column;

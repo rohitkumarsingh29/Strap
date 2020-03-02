@@ -14,7 +14,11 @@ import { MatInputModule} from '../../../node_modules/@angular/material/input';
 import {MatPaginatorModule } from '../../../node_modules/@angular/material/paginator';
 import {MatCardModule} from '../../../node_modules/@angular/material/card';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-
+import {MatProgressBarModule} from '../../../node_modules/@angular/material/progress-bar';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSelectModule} from '../../../node_modules/@angular/material/select';
 @NgModule({
   imports: [
     MatPaginatorModule,
@@ -31,7 +35,12 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatTabsModule,
     MatSidenavModule,
     MatCardModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatProgressBarModule,
+    MatGridListModule,
+    MatDividerModule,
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   exports: [
     MatPaginatorModule,
@@ -47,7 +56,12 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatTabsModule,
     MatSidenavModule,
     MatCardModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatProgressBarModule,
+    MatGridListModule,
+    MatDividerModule,
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   declarations: []
 })

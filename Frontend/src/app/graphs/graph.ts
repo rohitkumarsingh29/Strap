@@ -1,6 +1,10 @@
 export class Data{
-    data:number[]
-    label:any
+    public data:number[]
+    public label:any
+    constructor(label,data){
+        this.label=label;
+        this.data=data;
+    }
 }
 export class bar_chart{
     public options = {
@@ -21,12 +25,19 @@ export class bar_chart{
     }
 }
 export class pie_chart{
-    public label:any[];
+    public labels:any[];
     public data:number[];
     public type:string;
+    public legend=true;
+    public options = {
+        responsive: true,
+        legend: {
+          position: 'left',
+        }
+      };
     //type can be doughnut or pie
     constructor(label:any[],data:number[],type:string='pie'){
-        this.label=label;
+        this.labels=label;
         this.data=data;
         this.type=type;
     }
