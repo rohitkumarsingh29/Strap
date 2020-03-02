@@ -107,6 +107,30 @@ class Sector(Resource):
             "data" : [45,59,81,40,34]
         })
 
+class Sector_details(Resource):
+    def get(self,sector):
+        print(sector)
+        return jsonify({
+          "id":sector,          
+          "price":[10,20,30,10,40],
+          "volume":[500,600,200,100,1000],
+          "date":['2006', '2007', '2008', '2009', '2010'],
+          "datasource":[
+              {"ID":"aapl","Company":"Apple","YearOfInception":1984},
+              {"ID":"aaplw","Company":"Appqqle","YearOfInception":1884},
+              {"ID":"aapl","Company":"Apple","YearOfInception":1784},
+              {"ID":"aapql","Company":"ple","YearOfInception":1684},
+              {"ID":"al","Company":"qpple","YearOfInception":1994}
+          ],
+          "avgStat":[
+              {"parameter":"First Record","value":1984},
+              {"parameter":"Total Units Sold","value":200000},
+              {"parameter":"Best Year","value":2010},
+              {"parameter":"Total Registered Companies","value":2000},
+              {"parameter":"Current Value","value":209},
+          ]
+        })
+
     # def get(self, name):
     #     stock_table_name = name.lower()+"_us"
     #     postgreSQL_select_Query = "select date,(open+close)/2 as price from "+stock_table_name
@@ -120,6 +144,7 @@ api.add_resource(Square, '/square/<int:num>')
 api.add_resource(Price_graph, '/price/<string:name>') 
 api.add_resource(Sector,'/sector/all')
 api.add_resource(Sector_details,'/analytics')
+api.add_resource(Sector_details,'/sector/<string:sector>')
 # driver function 
 if __name__ == '__main__': 
   
