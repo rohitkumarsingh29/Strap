@@ -1,10 +1,12 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import {AuthService} from '../services/auth.service';
+import { MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS_FACTORY } from '@angular/material/progress-spinner';
 
-export interface Company{
-  label:string;
-  date:any[]
-  price:any[]
+export interface product{
+  sector:string;
+  year:number;
+  month:number;
+  day:number;
 }
 @Component({
   selector: 'app-analytics',
@@ -22,9 +24,11 @@ export class AnalyticsComponent implements OnInit {
   years:number[]=[];
   months:number[]=[];
   days:number[]=[];
+  sectors=['technology','healthcare'];
   yearSelected:number=-1;
   monthSelected:number=-1;
   daySelected:number=-1;
+  sectorSelected:string='any';
   monthShow=false;
   dayShow=false;
   setYear(){
@@ -75,9 +79,13 @@ export class AnalyticsComponent implements OnInit {
       else return false;
     }
   }
-  submitDate(){
-    
+  submitDate(){   
+    let p:product={day:this.daySelected,month:this.monthSelected,year:this.yearSelected,sector:this.sectorSelected};    
+    this.auth.addProduct(p).subscribe((result)=>{
+      console.log(result);
+    } );
   }
+
 
   
   
