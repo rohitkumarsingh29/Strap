@@ -1,40 +1,69 @@
 import { Component, OnInit } from '@angular/core';
 import {Data,bar_chart,pie_chart} from '../graphs/graph';
+import { SectorServiceService } from '../services/sector-service.service';
 
+const sector=["technology","healthcare"];
+export interface Sector{
+  id:String;  
+  price:Number[];
+  volume:Number[];
+  date:String[];
+  datasource:any[];
+  avgStat:any[];
+}
 @Component({
   selector: 'app-sector',
   templateUrl: './sector.component.html',
   styleUrls: ['./sector.component.css']
 })
 export class SectorComponent implements OnInit {
-  i=0;
-  mybarchart:bar_chart;
-  doughnutchart:pie_chart;
-  constructor() { 
-    this.mybarchart=new bar_chart(this.barChartLabels,this.barChartData);
-    this.doughnutchart=new pie_chart(this.doughnutChartLabels,this.doughnutChartData,'doughnut')
-  }
+  //bdata:Data[];
+  sectorArray:Sector[]=[]; 
+
+  constructor(private sect:SectorServiceService) { 
+    this.setShow();
+  } 
   
-
-  public barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  
-
-  public barChartData = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-  ];
-  public doughnutChartLabels = ['Sales Q1', 'Sales Q2', 'Sales Q3', 'Sales Q4'];
-  public doughnutChartData = [120, 150, 180, 90];
-  public doughnutChartType = 'doughnut';
-
   ngOnInit(): void {
+    this.getDetails();
+    this.getAll();
   }
-  isButton=false;
-  onBClick(event :Event){
-    this.isButton=!this.isButton;
-    //console.log(event,this.isButton);
-    console.log(this.mybarchart.label);
-    console.log(this.mybarchart.data.slice(0,1));
+  show:Boolean[]=[];
+  show_all=false;
+  pieChart:pie_chart;
+  setShow(){
+    for(let i=0;i<6;i++){
+      this.show.push(false);
+    }
   }
+  getDetails(){
+    for (let idx in sector){
+      let entry=sector[idx];
+      let num:Number=+idx+2;
+      console.log(num,entry);
+      this.sect.getSector(entry).subscribe((data) => {
+        //console.log(data);
+        let newSector:Sector;
+        newSector=data;
+        this.sectorArray.push(newSector);
+        this.show[idx]=true;
+        console.log(newSector.avgStat);
+      });
+    }
+  }
+  getAll(){
+    this.sect.getAll().subscribe((data)=>{
+      console.log(data);
+      this.pieChart=new pie_chart(data.labels,data.data);
+      this.show_all=true;
+    })
+  }
+
+  //table
+  displayedColumns=['ID','Company','YearOfInception'];
+  displayedColumns2=['parameter','value'];
+
+  
+  
 
 }

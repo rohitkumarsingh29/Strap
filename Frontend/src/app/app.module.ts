@@ -18,6 +18,10 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 import { StockprofileComponent } from './stockprofile/stockprofile.component';
 import { ChartsModule } from 'ng2-charts';
+import { AuthService } from './services/auth.service';
+import { LoginComponent } from './components/login/login.component';
+import { SectorServiceService } from './services/sector-service.service';
+import {StockprofileService} from './services/stockprofile.service';
 
 @NgModule({
   declarations: [
@@ -28,17 +32,20 @@ import { ChartsModule } from 'ng2-charts';
     SectorComponent,
     AnalyticsComponent,
     AboutusComponent,
-    StockprofileComponent
+    StockprofileComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule, Ng2SearchPipeModule,
+    FormsModule, 
+    Ng2SearchPipeModule,
     ChartsModule
   ],
-  providers: [],
+  providers: [AuthService,SectorServiceService,StockprofileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

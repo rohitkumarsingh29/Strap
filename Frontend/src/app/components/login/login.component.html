@@ -1,0 +1,48 @@
+<div class="main" *ngIf="show">
+    <form #useForm="ngForm">
+        <p class="sign">Login</p>
+        <div class="form-group">
+            <label class="ourText">Username</label>
+            <input type="text" #name="ngModel" required class="form-control infield" [class.is-invalid]="name.invalid && name.touched" name="name" [(ngModel)]="username">
+            <small class="text-danger" [class.d-none]="name.valid || name.untouched">Name is required</small>
+        </div> 
+        <div class="form-group">
+            <label class="ourText">Password</label>
+            <input type="password" #pwd="ngModel" required class="form-control infield" [class.is-invalid]="pwd.invalid && pwd.touched" name="pwd" [(ngModel)]="password">
+            <small class="text-danger" [class.d-none]="pwd.valid || pwd.untouched">Password required</small>
+        </div>   
+        <a class="submit">Sign in</a>
+    </form>
+    <p class="forgot">Not a member?</p>
+    <button mat-stroked-button color="primary" (click)="onClick()">Sign up</button>
+</div>
+<div class="setB">
+<div class="main" *ngIf="!show">
+    <form #useForm="ngForm">
+        <p class="sign">Register</p>
+        <div class="form-group">
+            <label class="ourText">Name</label>
+            <input type="text" #name="ngModel" required class="form-control infield" [class.is-invalid]="name.invalid && name.touched" name="name" [(ngModel)]="Name">
+            <small class="text-danger" [class.d-none]="name.valid || name.untouched">Name is required</small>
+        </div>
+        <div class="form-group">
+            <label class="ourText">Username</label>
+            <input type="text" #uname="ngModel" required class="form-control infield" [class.is-invalid]="uname.invalid && uname.touched" name="uname" [(ngModel)]="username">
+            <small class="text-danger" [class.d-none]="uname.valid || uname.untouched">Username is required</small>
+        </div> 
+        <div class="form-group">
+            <label class="ourText">Password</label>
+            <input type="password" #pwd="ngModel" required class="form-control infield" [class.is-invalid]="pwd.invalid && pwd.touched" name="pwd" [(ngModel)]="password">
+            <small class="text-danger" [class.d-none]="pwd.valid || pwd.untouched">Password required</small>
+        </div>
+        <div class="form-group">
+            <label class="ourText">Verify Password</label>
+            <input type="password" #pwdAgain="ngModel" required class="form-control infield" [class.is-invalid]="(password!=passwordAgain)&&pwdAgain.touched" name="pwdAgain" [(ngModel)]="passwordAgain">
+            <small class="text-danger" [class.d-none]=" (password==passwordAgain)|| pwdAgain.untouched">Password Doesn't Match</small>
+        </div>          
+        <a class="submit">Sign up</a>
+    </form>
+    <p class="forgot">Already a member?</p>
+    <button mat-stroked-button color="primary" (click)="onClick()">Sign in</button>
+</div>
+</div>
