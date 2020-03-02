@@ -1,1 +1,69 @@
-<app-login></app-login>
+<!-- <app-login></app-login> -->
+<div class="row">      
+    <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Bruce Wayne</mat-card-title>
+          <mat-card-subtitle>Superhero</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="../../assets/image/profile_pic.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+            <mat-table [dataSource]="datasource" class="topMargin">
+                <!-- ID Column -->
+                <ng-container matColumnDef="parameter">
+                  <mat-header-cell *matHeaderCellDef> Parameter </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.parameter}} </mat-cell>
+                </ng-container>
+              
+                <!-- Company Column -->
+                <ng-container matColumnDef="value">
+                  <mat-header-cell *matHeaderCellDef> Value </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.value}} </mat-cell>
+                </ng-container>                 
+                <mat-header-row *matHeaderRowDef="dispcol" ></mat-header-row>
+                <mat-row *matRowDef="let row; columns: dispcol;"></mat-row>
+              </mat-table>
+        </mat-card-content>        
+      </mat-card>
+  <mat-card class="long-card ml-3">
+      <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Trackrecord</mat-card-title>
+          <mat-card-subtitle>History of wealth held</mat-card-subtitle>
+      </mat-card-header>
+      <div class="main-image img-responsive">
+        <div style="display: block">
+          <canvas baseChart
+                  [datasets]="mybarchart.data"
+                  [labels]="mybarchart.label"
+                  [options]="mybarchart.options"
+                  [legend]="mybarchart.legend"
+                  [chartType]="'line'">
+          </canvas>
+        </div>
+      </div>
+      <mat-card-content flex>        
+        <mat-table [dataSource]="datasource2" class="mat-elevation-z8">
+            <!-- ID Column -->
+            <ng-container matColumnDef="ID">
+              <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+            </ng-container>
+          
+            <!-- Company Column -->
+            <ng-container matColumnDef="Company">
+              <mat-header-cell *matHeaderCellDef> Company Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            </ng-container>
+          
+            <!-- Year of Inception Column -->
+            <ng-container matColumnDef="Quantity">
+              <mat-header-cell *matHeaderCellDef> Units of Stock </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.qty}} </mat-cell>
+            </ng-container>          
+            <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>         
+      </mat-card-content>
+  </mat-card>
+</div>
