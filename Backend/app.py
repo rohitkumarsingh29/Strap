@@ -19,7 +19,6 @@ db = 'host=10.17.50.134  port=5432 dbname=group_31 user=group_31 password=235-56
 conn = psycopg2.connect(db)
 # dict_cur = conn.cursor(cursor_factory=RealDictCursor)
 dict_cur = conn.cursor()
-# print ( conn.get_dsn_parameters(),"\n")
 
 app = Flask(__name__)
 CORS(app)
