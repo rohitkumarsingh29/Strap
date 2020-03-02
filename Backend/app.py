@@ -70,9 +70,7 @@ class Price_graph(Resource):
             "date":date_str,
             "price":list(itertools.chain(*price))
         })
-
-class Sector_details(Resource):
-    
+class analytics(Resource):
     def post(self):
         data = request.get_json()
         log.debug('The following data was obtained: %s', data)
@@ -81,33 +79,15 @@ class Sector_details(Resource):
         return jsonify({
           "datasource":[
               {"ID":"aapl","Company":"Apple","YearOfInception":1984},
-              {"ID":"aaplw","Company":"Appqqle","YearOfInception":1884},
-              {"ID":"aapl","Company":"Apple","YearOfInception":1784},
-              {"ID":"aapql","Company":"ple","YearOfInception":1684},
-              {"ID":"al","Company":"qpple","YearOfInception":1994}
+              {"ID":"ddd","Company":"3D Systems","YearOfInception":1995},
+              {"ID":"anf","Company":"Abercrombie & Fitch","YearOfInception":1982},
+              {"ID":"acn","Company":"accenture plc","YearOfInception":1999},
+              {"ID":"agco","Company":"Agco corporation","YearOfInception":2004}
           ]
-        })
-
-    def get(self,sector):
-        print(sector)
-        return jsonify({
-          "datasource":[
-              {"ID":"aapl","Company":"Apple","YearOfInception":1984},
-              {"ID":"aaplw","Company":"Appqqle","YearOfInception":1884},
-              {"ID":"aapl","Company":"Apple","YearOfInception":1784},
-              {"ID":"aapql","Company":"ple","YearOfInception":1684},
-              {"ID":"al","Company":"qpple","YearOfInception":1994}
-          ]
-        })
-
-class Sector(Resource):
-    def get(self):
-        return jsonify({
-            "labels":['Technology','Healthcare','qqqqwe','adddfa','aedefds'],
-            "data" : [45,59,81,40,34]
         })
 
 class Sector_details(Resource):
+
     def get(self,sector):
         print(sector)
         return jsonify({
@@ -117,10 +97,10 @@ class Sector_details(Resource):
           "date":['2006', '2007', '2008', '2009', '2010'],
           "datasource":[
               {"ID":"aapl","Company":"Apple","YearOfInception":1984},
-              {"ID":"aaplw","Company":"Appqqle","YearOfInception":1884},
-              {"ID":"aapl","Company":"Apple","YearOfInception":1784},
-              {"ID":"aapql","Company":"ple","YearOfInception":1684},
-              {"ID":"al","Company":"qpple","YearOfInception":1994}
+              {"ID":"ddd","Company":"3D Systems","YearOfInception":1995},
+              {"ID":"anf","Company":"Abercrombie & Fitch","YearOfInception":1982},
+              {"ID":"acn","Company":"accenture plc","YearOfInception":1999},
+              {"ID":"agco","Company":"Agco corporation","YearOfInception":2004}
           ],
           "avgStat":[
               {"parameter":"First Record","value":1984},
@@ -130,6 +110,14 @@ class Sector_details(Resource):
               {"parameter":"Current Value","value":209},
           ]
         })
+
+class Sector(Resource):
+    def get(self):
+        return jsonify({
+            "labels":['Technology','Healthcare','qqqqwe','adddfa','aedefds'],
+            "data" : [45,59,81,40,34]
+        })
+        
 
     # def get(self, name):
     #     stock_table_name = name.lower()+"_us"
@@ -141,10 +129,10 @@ class Sector_details(Resource):
 # adding the defined resources along with their corresponding urls 
 api.add_resource(Hello, '/') 
 api.add_resource(Square, '/square/<int:num>') 
-api.add_resource(Price_graph, '/price/<string:name>') 
+api.add_resource(Price_graph, '/price/<string:name>')
+api.add_resource(Sector_details,'/sector/<string:sector>') 
 api.add_resource(Sector,'/sector/all')
-api.add_resource(Sector_details,'/analytics')
-api.add_resource(Sector_details,'/sector/<string:sector>')
+api.add_resource(analytics,'/analytics')
 # driver function 
 if __name__ == '__main__': 
   
