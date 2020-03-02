@@ -100,7 +100,7 @@ class Sector_details(Resource):
           ]
         })
 
-    class Sector(Resource):
+class Sector(Resource):
     def get(self):
         return jsonify({
             "labels":['Technology','Healthcare','qqqqwe','adddfa','aedefds'],
