@@ -100,6 +100,13 @@ class Sector_details(Resource):
           ]
         })
 
+    class Sector(Resource):
+    def get(self):
+        return jsonify({
+            "labels":['Technology','Healthcare','qqqqwe','adddfa','aedefds'],
+            "data" : [45,59,81,40,34]
+        })
+
     # def get(self, name):
     #     stock_table_name = name.lower()+"_us"
     #     postgreSQL_select_Query = "select date,(open+close)/2 as price from "+stock_table_name
@@ -111,7 +118,7 @@ class Sector_details(Resource):
 api.add_resource(Hello, '/') 
 api.add_resource(Square, '/square/<int:num>') 
 api.add_resource(Price_graph, '/price/<string:name>') 
-
+api.add_resource(Sector,'/sector/all')
 api.add_resource(Sector_details,'/analytics')
 # driver function 
 if __name__ == '__main__': 
