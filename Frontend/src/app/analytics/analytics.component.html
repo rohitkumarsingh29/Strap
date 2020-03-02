@@ -1,5 +1,11 @@
 <h1> Select Year to view Result</h1>
 <mat-form-field>
+  <mat-label>Choose Sector</mat-label>
+  <mat-select [(value)]="sectorSelected">
+    <mat-option *ngFor="let y of sectors" [value]="y">{{y}}</mat-option>
+  </mat-select>    
+</mat-form-field>
+<mat-form-field>
     <mat-label>Choose Year</mat-label>
     <mat-select [(value)]="yearSelected" (selectionChange)="onSelect()">
       <mat-option value=-1>None</mat-option>      
@@ -24,5 +30,5 @@
     </mat-select>
  </mat-form-field>
  </div> 
- <button *ngIf="monthShow" mat-raised-button class="btn-block" color="accent" (click)="submitDate">See The Results</button> 
-  <p>You selected: {{yearSelected}} {{monthSelected}} {{daySelected}}</p>
+ <button *ngIf="monthShow" mat-raised-button class="btn-block" color="accent" (click)="submitDate()">See The Results</button> 
+  <p>You selected:{{sectorSelected}} {{yearSelected}} {{monthSelected}} {{daySelected}}</p>

@@ -19,6 +19,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSelectModule} from '../../../node_modules/@angular/material/select';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 @NgModule({
   imports: [
     MatPaginatorModule,
@@ -40,7 +42,8 @@ import {MatSelectModule} from '../../../node_modules/@angular/material/select';
     MatGridListModule,
     MatDividerModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatExpansionModule
   ],
   exports: [
     MatPaginatorModule,
@@ -61,7 +64,8 @@ import {MatSelectModule} from '../../../node_modules/@angular/material/select';
     MatGridListModule,
     MatDividerModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatExpansionModule
   ],
   declarations: []
 })

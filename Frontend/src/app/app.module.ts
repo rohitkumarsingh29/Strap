@@ -22,6 +22,7 @@ import { AuthService } from './services/auth.service';
 import { LoginComponent } from './components/login/login.component';
 import { SectorServiceService } from './services/sector-service.service';
 import {StockprofileService} from './services/stockprofile.service';
+import { BucketsComponent } from './buckets/buckets.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {StockprofileService} from './services/stockprofile.service';
     AnalyticsComponent,
     AboutusComponent,
     StockprofileComponent,
-    LoginComponent
+    LoginComponent,
+    BucketsComponent
   ],
   imports: [
     BrowserModule,
