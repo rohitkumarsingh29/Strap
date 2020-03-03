@@ -23,11 +23,7 @@
             In this section we present the description statistics of all the major sectors avaiable in
             the market.
           </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
+        </mat-card-content>        
       </mat-card>
     <mat-card class="long-card ml-3">
         <mat-card-header>
@@ -37,7 +33,18 @@
         </mat-card-header>
         <mat-card-content flex>
             <mat-tab-group mat-stretch-tabs backgroundColor="accent">
-                <mat-tab *ngFor="let sec of sectorArray" [label]="sec.id">Content {{sec.id}}                  
+                <mat-tab *ngFor="let sec of sectorArray" [label]="sec.id">
+                  <div class="main-image img-responsive">
+                    <div style="display: block">
+                      <canvas baseChart
+                              [datasets]="mybarchart.data"
+                              [labels]="mybarchart.label"
+                              [options]="mybarchart.options"
+                              [legend]="mybarchart.legend"
+                              [chartType]="'line'">
+                      </canvas>
+                    </div>
+                  </div>                
                 </mat-tab>
             </mat-tab-group>
             <div class="d-flex justify-content-end">

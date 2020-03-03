@@ -19,9 +19,10 @@ export interface Sector{
 export class SectorComponent implements OnInit {
   //bdata:Data[];
   sectorArray:Sector[]=[]; 
-
+  mybarchart:bar_chart;
   constructor(private sect:SectorServiceService) { 
     this.setShow();
+    this.mybarchart=new bar_chart(this.barChartLabels,this.barChartData);
   } 
   
   ngOnInit(): void {
@@ -60,6 +61,11 @@ export class SectorComponent implements OnInit {
   }
 
   //table
+  public barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartData = [
+    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Volume'},
+    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Price'}
+  ];
   displayedColumns=['ID','Company','YearOfInception'];
   displayedColumns2=['parameter','value'];
 
