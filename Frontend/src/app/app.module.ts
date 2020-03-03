@@ -15,7 +15,7 @@ import { SectorComponent } from './sector/sector.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { StockprofileComponent } from './stockprofile/stockprofile.component';
 import { ChartsModule } from 'ng2-charts';
 import { AuthService } from './services/auth.service';
@@ -23,6 +23,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SectorServiceService } from './services/sector-service.service';
 import {StockprofileService} from './services/stockprofile.service';
 import { BucketsComponent } from './buckets/buckets.component';
+import { BucketService } from './services/bucket.service';
 
 @NgModule({
   declarations: [
@@ -45,9 +46,10 @@ import { BucketsComponent } from './buckets/buckets.component';
     MaterialModule,
     FormsModule, 
     Ng2SearchPipeModule,
-    ChartsModule
+    ChartsModule,
+    ReactiveFormsModule
   ],
-  providers: [AuthService,SectorServiceService,StockprofileService],
+  providers: [AuthService,SectorServiceService,StockprofileService,BucketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

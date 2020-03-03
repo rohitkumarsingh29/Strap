@@ -46,8 +46,96 @@
       </mat-expansion-panel-header>
       <p>Will display table here</p>
     </mat-expansion-panel>
+    <div *ngFor="let b of myBuckets">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{b.name}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{b.id}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+          <mat-table [dataSource]="b.bucketList" class="mat-elevation-z8">
+              <!-- ID Column -->
+              <ng-container matColumnDef="ID">
+                <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+              </ng-container>
+            
+              <!-- Company Column -->
+              <ng-container matColumnDef="Company">
+                <mat-header-cell *matHeaderCellDef> Company Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.cname}} </mat-cell>
+              </ng-container>
+            
+              <!-- Year of Inception Column -->
+              <ng-container matColumnDef="Quantity">
+                <mat-header-cell *matHeaderCellDef> Units of Stock </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.qty}} </mat-cell>
+              </ng-container>          
+              <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </div>
+      </mat-expansion-panel>
+    </div>
   </mat-accordion>
   <br>
   <br>
-  <button  mat-raised-button class="btn-block" color="accent" (click)="showAnotherBucket()">Add another Bucket</button>
+  <button  *ngIf="!newB" mat-raised-button class="btn-block" color="accent" (click)="showAnotherBucket()">Add another Bucket</button>
+  <button  *ngIf="newB" mat-raised-button class="btn-danger btn-block"  (click)="showAnotherBucket()">Cancel</button>
+
+
+<ng-container *ngIf="newB">
+  <mat-form-field appearance="legacy">
+    <mat-label>Bucket Name</mat-label>
+    <input matInput placeholder="Enter The Bucket name" [(ngModel)]="newBucket.name">
+    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint> -->
+  </mat-form-field>
+  <div>
+    <mat-table #table [dataSource]="datS">
+        <!-- ID Column -->
+        <ng-container matColumnDef="ID">
+          <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+        </ng-container>  
+        
+        
+      
+        <!-- Year of Inception Column -->
+        <ng-container matColumnDef="Quantity">
+          <mat-header-cell *matHeaderCellDef> Units of Stock </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.qty}} </mat-cell>
+        </ng-container>          
+        <mat-header-row *matHeaderRowDef="displayedCol" ></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedCol;"></mat-row>
+      </mat-table>
+  </div>
+
+</ng-container>
+
+<ng-container *ngIf="newB">
+  <div>
+  <form [hidden]="!newB" class="example-form">    
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="Select Stock" aria-label="Number" matInput
+             [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="selectedStock" name="stock-code">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field class="end-btn">
+      <mat-label>Qty</mat-label>
+      <input type="number" min="0" matInput [(ngModel)]="selectedQty" name="stock-qty">
+    </mat-form-field>
+    <button mat-raised-button class="btn btn-dark" (click)="add_to_list()">Add</button>
+  </form>
+</div>
+</ng-container>
+  
   

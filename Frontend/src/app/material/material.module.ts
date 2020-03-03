@@ -20,6 +20,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSelectModule} from '../../../node_modules/@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatDividerModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatPaginatorModule,
@@ -65,7 +67,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatDividerModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatAutocompleteModule
   ],
   declarations: []
 })
