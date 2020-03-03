@@ -5,10 +5,8 @@
     </button>
     <h1>{{title}} <mat-icon>bubble_chart</mat-icon></h1>
     <span class="menu-spacer"></span>
-    <div>
-      <div *ngIf="isLoggedIn">
-        <button mat-button [routerLink]="'/login'"> Logout </button>
-      </div>
+    <div>      
+      <button *ngIf="auth.isLoggedIn" mat-button (click)="onClick()"> Logout </button>
       <button mat-button [routerLink]="'/about'"> About Us </button>
       <button mat-button [routerLink]="'/accounts'"> GitHub </button>      
     </div>

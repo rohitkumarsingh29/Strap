@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,18 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(public auth:AuthService,public router:Router) { }
 
   ngOnInit(): void {
   }
-  show=false;
+  show=true;
   Name="";
-  username="start";
-  password="aaa";
+  username="";
+  password="";
   passwordAgain="";
   errorMsg="Check Credentials"
   onClick(){
     this.show=!this.show;
+  }
+  user={username:this.username,password:this.password};
+  Login(){
+    this.auth.login(this.user).subscribe((data)=>{
+      console.log(data);
+      if (data.msg){
+        this.auth.isLoggedIn=true;
+        this.router.navigate(['/'])
+        
+      }
+      else{
+        this.auth.isLoggedIn=false;
+
+      }
+    })
   }
 
 }

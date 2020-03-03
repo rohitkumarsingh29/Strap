@@ -26,4 +26,22 @@ export class BucketService {
   getCompany():Observable<any>{
     return this.http.get(endpoint+'companylist').pipe(map(this.extractData));
   }
+  addBucket (product): Observable<any> {
+    console.log(product);
+    return this.http.post<any>(endpoint, JSON.stringify(product), httpOptions).pipe(
+      tap((product) => console.log(`added bucket w/ id=${product.id}`))      
+    );
+  }
+  deleteBucket(id):Observable<any>{
+    return this.http.get(endpoint+'delete/'+id).pipe(map(this.extractData));
+  }
+
+  getPrice():Observable<any>{
+    return this.http.get(endpoint+'price').pipe(map(this.extractData));
+  }
+  addShareList(sharelist):Observable<any>{
+    return this.http.post<any>(endpoint+'price', JSON.stringify(sharelist), httpOptions).pipe(
+      tap((product) => console.log(`added Share List w/ id=${sharelist.length}`))      
+    );
+  }
 }

@@ -6,16 +6,7 @@ import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {MatTableDataSource} from '@angular/material/table';
-
-
-const dataSource=[
-  {id:'DDD',name:'3D Systems Corporation',qty:10},
-  {id:'WUBA',name:'58.com Inc',qty:15},
-  {id:'EGHT',name:'8x8 Inc',qty:100},
-  {id:'ATEN',name:'A10 Networks, Inc',qty:105},
-  {id:'AAN',name:'Aaron&#39;s,  Inc',qty:10},
-  {id:'AER',name:'Aercap Holdings N.V',qty:110}
-]
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-buckets',
@@ -28,8 +19,9 @@ export class BucketsComponent implements OnInit {
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
   datS: MatTableDataSource<BucketTable>;
+  showBucket=false;//loading bar
   
-  constructor(private buck:BucketService) { 
+  constructor(private buck:BucketService,private _snackBar: MatSnackBar) { 
     this.newBucket=new Bucket();
     this.datS=new MatTableDataSource(this.newBucket.bucketList);    
   }
@@ -58,13 +50,9 @@ export class BucketsComponent implements OnInit {
     this.newBucket.bucketList.push(temp);
     console.log(this.newBucket.bucketList);
     this.datS=new MatTableDataSource(this.newBucket.bucketList);
-    console.log(this.datS.data);
-    this.options.push('Four');
-
   }
 
   myBuckets:Bucket[]=[];
-  datasource=dataSource;
   displayedColumns=['ID','Company','Quantity'];
   displayedCol=['ID','Quantity'];
 
@@ -86,17 +74,39 @@ export class BucketsComponent implements OnInit {
         tempBucket.bucketList=temList;
         console.log(tempBucket);
         this.myBuckets.push(tempBucket);
+        this.showBucket=true;
       }      
     });
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
   getCompany(){
     this.buck.getCompany().subscribe((data)=>{
       this.options=data.companies;
+    })
+  }
+  submitBucket(){
+    console.log(JSON.stringify(this.newBucket));
+    this.buck.addBucket(this.newBucket).subscribe((data)=>{
+      console.log(data);
+      if(data.status){
+        console.log("Done!");
+        this._snackBar.open("Bucket Added!",'',{
+          duration:2000,
+        });
+        this.newB=false;
+        this.myBuckets.push(this.newBucket);
+      }
+    })
+  }
+  DeleteBucket(idx){
+    this.buck.deleteBucket(this.myBuckets[idx].name).subscribe((data)=>{
+      if (data.stat){
+        this.myBuckets.splice(idx,1);
+        console.log(this.myBuckets);
+      }
     })
   }
   selectedStock='none';

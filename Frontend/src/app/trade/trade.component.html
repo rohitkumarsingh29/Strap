@@ -1,0 +1,42 @@
+<button class="btn btn-primary">Buy</button>
+<button class="btn btn-primary" style="margin-left: 8px;">Sell</button>
+<div>
+    <mat-table #table [dataSource]="datS">
+        <!-- ID Column -->
+        <ng-container matColumnDef="ID">
+          <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+        </ng-container>        
+        <!-- Year of Inception Column -->
+        <ng-container matColumnDef="Quantity">
+          <mat-header-cell *matHeaderCellDef> Units of Stock </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.qty}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Price">
+            <mat-header-cell *matHeaderCellDef> Total Cost </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{CalCost(element)}} </mat-cell>
+          </ng-container>            
+        <mat-header-row *matHeaderRowDef="displayedCol" ></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedCol;"></mat-row>
+      </mat-table>
+  </div>
+  <div>
+    <form  class="example-form">    
+      <mat-form-field class="example-full-width">
+        <input type="text" placeholder="Select Stock" aria-label="Number" matInput
+               [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="selectedStock" name="stock-code">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field class="end-btn">
+        <mat-label>Qty</mat-label>
+        <input type="number" min="0" matInput [(ngModel)]="selectedQty" name="stock-qty">
+      </mat-form-field>
+      <button mat-raised-button class="btn btn-dark" (click)="add_to_list()">Add</button>
+      <button mat-raised-button *ngIf="newShareList.length>0" class="btn-success btn-block" (click)="checkout()"> Checkout!</button>
+
+    </form>
+  </div>

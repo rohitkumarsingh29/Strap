@@ -23,7 +23,10 @@
                 <mat-header-row *matHeaderRowDef="dispcol" ></mat-header-row>
                 <mat-row *matRowDef="let row; columns: dispcol;"></mat-row>
               </mat-table>
-        </mat-card-content>        
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button class="btn-success btn-block" [routerLink]="'/trade'">Go to TRADE</button>
+        </mat-card-actions>        
       </mat-card>
   <mat-card class="long-card ml-3">
       <mat-card-header>

@@ -11,7 +11,7 @@
             <input type="password" #pwd="ngModel" required class="form-control infield" [class.is-invalid]="pwd.invalid && pwd.touched" name="pwd" [(ngModel)]="password">
             <small class="text-danger" [class.d-none]="pwd.valid || pwd.untouched">Password required</small>
         </div>   
-        <a class="submit">Sign in</a>
+        <a class="submit" (click)="Login()">Sign in</a>
     </form>
     <p class="forgot">Not a member?</p>
     <button mat-stroked-button color="primary" (click)="onClick()">Sign up</button>

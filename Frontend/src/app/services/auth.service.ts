@@ -32,14 +32,17 @@ export class AuthService {
     return a;
   }
 
-  getProducts(): Observable<any> {
-    return this.http.get(endpoint).pipe(
-      map(this.extractData));
+  login(user):Observable<any>{
+    return this.http.post<any>(endpoint + 'login', JSON.stringify(user), httpOptions).pipe(
+      tap((product) => console.log(`added product w/ id=${product.id}`))
+    );
   }
-  getProduct(id): Observable<any> {
-    return this.http.get(endpoint + 'price/' + id).pipe(
-      map(this.extractData));
-  }
+  logout():Observable<any>{
+    this.isLoggedIn=false;
+    let a=this.http.get(endpoint+'logout').pipe(map(this.extractData));
+    return a;
+  }  
+  
   addProduct (product): Observable<any> {
     console.log(product);
     return this.http.post<any>(endpoint + 'analytics', JSON.stringify(product), httpOptions).pipe(

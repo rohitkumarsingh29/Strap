@@ -1,59 +1,15 @@
 <h1>Bucket Maker</h1>
 <h2> View-Add-Delete Buckets</h2>
+<ng-container *ngIf="showBucket; else elseblock1">
 <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Tech Bucket
-        </mat-panel-title>
-        <mat-panel-description>
-          Tech bucket stored here          
-        </mat-panel-description>
-      </mat-expansion-panel-header> 
-      <div>
-        <mat-table [dataSource]="datasource" class="mat-elevation-z8">
-            <!-- ID Column -->
-            <ng-container matColumnDef="ID">
-              <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
-            </ng-container>
-          
-            <!-- Company Column -->
-            <ng-container matColumnDef="Company">
-              <mat-header-cell *matHeaderCellDef> Company Name </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-            </ng-container>
-          
-            <!-- Year of Inception Column -->
-            <ng-container matColumnDef="Quantity">
-              <mat-header-cell *matHeaderCellDef> Units of Stock </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.qty}} </mat-cell>
-            </ng-container>          
-            <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-          </mat-table>
-      </div>
-    </mat-expansion-panel>
-    <mat-expansion-panel (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Misc Bucket
-        </mat-panel-title>
-        <mat-panel-description>
-            miscellaneous stocks added
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <p>Will display table here</p>
-    </mat-expansion-panel>
-    <div *ngFor="let b of myBuckets">
+    <div *ngFor="let b of myBuckets;index as i">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{b.name}}
           </mat-panel-title>
           <mat-panel-description>
-            {{b.id}}
+            Stonks            
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div>
@@ -79,9 +35,14 @@
               <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </mat-table>
         </div>
+        <button mat-raised-button class="btn-danger" (click)="DeleteBucket(i)" style="margin-top: 20px;"><mat-icon>close</mat-icon>Delete this bucket</button>
       </mat-expansion-panel>
     </div>
   </mat-accordion>
+</ng-container>
+<ng-template #elseblock1>
+  <mat-progress-bar mode="query"></mat-progress-bar>
+</ng-template>
   <br>
   <br>
   <button  *ngIf="!newB" mat-raised-button class="btn-block" color="accent" (click)="showAnotherBucket()">Add another Bucket</button>
@@ -92,8 +53,6 @@
   <mat-form-field appearance="legacy">
     <mat-label>Bucket Name</mat-label>
     <input matInput placeholder="Enter The Bucket name" [(ngModel)]="newBucket.name">
-    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    <mat-hint>Hint</mat-hint> -->
   </mat-form-field>
   <div>
     <mat-table #table [dataSource]="datS">
@@ -134,6 +93,7 @@
       <input type="number" min="0" matInput [(ngModel)]="selectedQty" name="stock-qty">
     </mat-form-field>
     <button mat-raised-button class="btn btn-dark" (click)="add_to_list()">Add</button>
+    <button mat-raised-button *ngIf="newBucket.bucketList.length>0" class="btn-success btn-block" (click)="submitBucket()"> Submit</button>
   </form>
 </div>
 </ng-container>

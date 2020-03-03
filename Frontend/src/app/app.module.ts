@@ -24,6 +24,8 @@ import { SectorServiceService } from './services/sector-service.service';
 import {StockprofileService} from './services/stockprofile.service';
 import { BucketsComponent } from './buckets/buckets.component';
 import { BucketService } from './services/bucket.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { TradeComponent } from './trade/trade.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { BucketService } from './services/bucket.service';
     AboutusComponent,
     StockprofileComponent,
     LoginComponent,
-    BucketsComponent
+    BucketsComponent,
+    TradeComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,7 @@ import { BucketService } from './services/bucket.service';
     ChartsModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService,SectorServiceService,StockprofileService,BucketService],
+  providers: [AuthService,AuthGuardService,SectorServiceService,StockprofileService,BucketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
