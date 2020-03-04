@@ -118,12 +118,31 @@ export class TradeComponent implements OnInit {
     console.log(idx,this.currentShareList[idx]);
     this.qtySell=this.currentShareList[idx].qty;
     this.stockSell=this.currentShareList[idx].id;
+    this.idxSell=idx;
     this.showStockSell=true;
   }
   selectedStock='';
   selectedQty=0;
+
   showStockSell=false;
   qtySell=0;
   stockSell='';
+  idxSell=-1;
+
+  checkoutSell(){
+    this.buck.sellShare(this.stockSell,this.qtySell).subscribe((data)=>{
+      console.log(data);
+      if (data.stat){
+        if (this.qtySell>=this.currentShareList[this.idxSell].qty){
+          this.currentShareList.splice(this.idxSell,1);
+        }
+        else{
+          this.currentShareList[this.idxSell].qty=this.currentShareList[this.idxSell].qty-this.qtySell;
+        }
+        this.showStockSell=false;
+        this.dataSourceSell=new MatTableDataSource(this.currentShareList);
+      }
+    })
+  }
 
 }

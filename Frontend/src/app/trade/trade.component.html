@@ -75,5 +75,5 @@
         <mat-label>Units to be Sold</mat-label>
         <input type="number" matInput placeholder="Number of Shares to Sell" [(ngModel)]="qtySell" style="margin-left: 10px;">
     </mat-form-field>
-    <button mat-raised-button class="btn-warning" style="margin-left: 10px;">Chekout!</button>
+    <button mat-raised-button class="btn-warning" style="margin-left: 10px;" (click)="checkoutSell()">Chekout!</button>
 </div>

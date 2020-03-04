@@ -48,4 +48,7 @@ export class BucketService {
   getShareList():Observable<any>{
     return this.http.get('http://localhost:5000/trade/sell').pipe(map(this.extractData));
   }
+  sellShare(id,qty):Observable<any>{
+    return this.http.get('http://localhost:5000/trade/sell/'+id+'/'+qty).pipe(map(this.extractData));
+  }
 }
