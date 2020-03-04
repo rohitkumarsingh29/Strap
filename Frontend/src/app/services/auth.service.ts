@@ -46,7 +46,7 @@ export class AuthService {
   addProduct (product): Observable<any> {
     console.log(product);
     return this.http.post<any>(endpoint + 'analytics', JSON.stringify(product), httpOptions).pipe(
-      tap((product) => console.log(`added product w/ id=${product.id}`))
+      tap((product) => console.log(`added product w/ id=${product.sector}`))
     );
   }
 

@@ -12,12 +12,12 @@ import { TradeComponent } from './trade/trade.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full',},
-  { path: 'home', component: HomeComponent,canActivate:[AuthGuardService] },
-  { path: 'about', component: AboutusComponent,canActivate:[AuthGuardService] },
+  { path: 'home', component: HomeComponent},
+  { path: 'about', component: AboutusComponent },
   { path: 'profile', component: ProfileComponent,canActivate:[AuthGuardService] },
-  { path: 'sector', component: SectorComponent,canActivate:[AuthGuardService] },
+  { path: 'sector', component: SectorComponent },
   { path: 'trends', component: BucketsComponent },
-  { path: 'analytics', component: AnalyticsComponent,canActivate:[AuthGuardService] },
+  { path: 'analytics', component: AnalyticsComponent },
   {path: 'login',component:LoginComponent},
   {path:'trade', component:TradeComponent}
   

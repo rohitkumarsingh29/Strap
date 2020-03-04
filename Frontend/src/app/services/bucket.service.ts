@@ -51,4 +51,9 @@ export class BucketService {
   sellShare(id,qty):Observable<any>{
     return this.http.get('http://localhost:5000/trade/sell/'+id+'/'+qty).pipe(map(this.extractData));
   }
+
+  //plot chart
+  plot():Observable<any>{
+    return this.http.get(endpoint+'plot').pipe(map(this.extractData));
+  }
 }

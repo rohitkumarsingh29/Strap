@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Data,bar_chart,pie_chart} from '../graphs/graph';
+import {Data,DataPoint,bar_chart,pie_chart, LineChart} from '../graphs/graph';
+import { BucketService } from '../services/bucket.service';
+import { BucketTable } from '../CLasses/bucket-table';
+import { MatTableDataSource } from '@angular/material/table';
 
 const dataSource=[
   {parameter:"Username",value:"brucewain"},
@@ -8,14 +11,7 @@ const dataSource=[
   {parameter:"Balance",value:"$-100000"},
   {parameter:"Number of Transactions",value:"1000"},
 ];
-const dataSource2=[
-  {id:'DDD',name:'3D Systems Corporation',qty:10},
-  {id:'WUBA',name:'58.com Inc',qty:15},
-  {id:'EGHT',name:'8x8 Inc',qty:100},
-  {id:'ATEN',name:'A10 Networks, Inc',qty:105},
-  {id:'AAN',name:'Aaron&#39;s,  Inc',qty:10},
-  {id:'AER',name:'Aercap Holdings N.V',qty:110}
-]
+
 
 @Component({
   selector: 'app-home',
@@ -23,23 +19,49 @@ const dataSource2=[
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  mybarchart:bar_chart;
-  constructor() { 
-    this.mybarchart=new bar_chart(this.barChartLabels,this.barChartData);
-
+  mylinechart:LineChart;
+  ds:MatTableDataSource<BucketTable>;
+  constructor(public buck:BucketService) { 
+    this.ds=new MatTableDataSource(this.datasource2);
+    this.mylinechart=new LineChart();
   }
 
   ngOnInit(): void {
+    this.getStock();
+    this.getChart();
+        
   }
   datasource=dataSource;
-  dispcol=['parameter','value'];
-  public barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  datasource2=dataSource2;  
-
-  public barChartData = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Tech Bucket'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Misc Bucket'}
-  ];
+  dispcol=['parameter','value']; 
+  datasource2:BucketTable[]=[];  
   displayedColumns=['ID','Company','Quantity'];
+
+
+  getStock(){
+    return this.buck.getShareList().subscribe((data)=>{
+      for(let entry of data){
+        this.datasource2.push(entry);
+      }
+      console.log(this.datasource2);
+      this.ds=new MatTableDataSource(this.datasource2);
+    })
+  }
+  getChart(){
+    this.buck.plot().subscribe((data)=>{
+      for (let entry of data){
+        console.log(entry);
+        let tempdata:DataPoint[]=[];
+        for (let point of entry.datapoint){
+          let temp=new DataPoint();
+          temp.x=new Date(point.year,point.month,point.day);
+          temp.y=point.price;
+          tempdata.push(temp);
+        }
+        this.mylinechart.pushData(tempdata,entry.id);
+      }
+      this.mylinechart.createChart();
+    })
+    
+  }
 
 }

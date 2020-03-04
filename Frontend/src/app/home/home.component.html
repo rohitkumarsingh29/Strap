@@ -36,17 +36,11 @@
       </mat-card-header>
       <div class="main-image img-responsive">
         <div style="display: block">
-          <canvas baseChart
-                  [datasets]="mybarchart.data"
-                  [labels]="mybarchart.label"
-                  [options]="mybarchart.options"
-                  [legend]="mybarchart.legend"
-                  [chartType]="'line'">
-          </canvas>
+          <div id="chartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
         </div>
       </div>
       <mat-card-content flex>        
-        <mat-table [dataSource]="datasource2" class="mat-elevation-z8">
+        <mat-table [dataSource]="ds" class="mat-elevation-z8">
             <!-- ID Column -->
             <ng-container matColumnDef="ID">
               <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
@@ -56,7 +50,7 @@
             <!-- Company Column -->
             <ng-container matColumnDef="Company">
               <mat-header-cell *matHeaderCellDef> Company Name </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{element.cname}} </mat-cell>
             </ng-container>
           
             <!-- Year of Inception Column -->
