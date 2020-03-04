@@ -26,6 +26,7 @@ import { BucketsComponent } from './buckets/buckets.component';
 import { BucketService } from './services/bucket.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { TradeComponent } from './trade/trade.component';
+import { LinegraphComponent } from './components/linegraph/linegraph.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { TradeComponent } from './trade/trade.component';
     StockprofileComponent,
     LoginComponent,
     BucketsComponent,
-    TradeComponent
+    TradeComponent,
+    LinegraphComponent
   ],
   imports: [
     BrowserModule,

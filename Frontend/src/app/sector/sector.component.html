@@ -33,27 +33,24 @@
         </mat-card-header>
         <mat-card-content flex>
             <mat-tab-group mat-stretch-tabs backgroundColor="accent">
-                <mat-tab *ngFor="let sec of sectorArray" [label]="sec.id">
+              <ng-container *ngFor="let sec of sectorArray">
+                <mat-tab  [label]="sec.id">
                   <div class="main-image img-responsive">
                     <div style="display: block">
-                      <canvas baseChart
-                              [datasets]="mybarchart.data"
-                              [labels]="mybarchart.label"
-                              [options]="mybarchart.options"
-                              [legend]="mybarchart.legend"
-                              [chartType]="'line'">
-                      </canvas>
+                      
+                      <button class="btn btn-block btn-dark" [routerLink]="['/linegraph', sec.id]">DISPLAY GRAPH</button>
                     </div>
                   </div>                
                 </mat-tab>
+                </ng-container>
             </mat-tab-group>
             <div class="d-flex justify-content-end">
                 <mat-card-actions>
-                <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style" class="mr-auto">
+                <!-- <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style" class="mr-auto">
                     <mat-button-toggle value="bold" [checked]="true">Price</mat-button-toggle>
                     <mat-button-toggle value="italic">Quantity</mat-button-toggle>
                     <mat-button-toggle value="underline">Volume</mat-button-toggle>
-                </mat-button-toggle-group>
+                </mat-button-toggle-group> -->
                 </mat-card-actions>
             </div>
         </mat-card-content>
@@ -121,3 +118,5 @@
       </mat-card>
     </div>
   </div>
+ 
+ 

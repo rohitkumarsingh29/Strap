@@ -1,28 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import {Data,bar_chart,pie_chart} from '../graphs/graph';
+import { Component, OnInit, ViewChildren,AfterViewInit } from '@angular/core';
+import {Data,bar_chart,pie_chart, LineChart, DataPoint} from '../graphs/graph';
 import { SectorServiceService } from '../services/sector-service.service';
+import { AvgStat } from '../CLasses/avg-stat';
 
-const sector=["technology","healthcare"];
-export interface Sector{
+const sector=["technology","healthcare12"];
+export class Sector{
   id:String;  
-  price:Number[];
-  volume:Number[];
-  date:String[];
   datasource:any[];
   avgStat:any[];
+  priceChart:LineChart;
+  volumeChart:LineChart;
+  constructor(){
+    this.id='';
+    this.datasource=[];
+    this.avgStat=[];
+    this.priceChart=new LineChart();
+    this.volumeChart=new LineChart();
+  }
 }
 @Component({
   selector: 'app-sector',
   templateUrl: './sector.component.html',
   styleUrls: ['./sector.component.css']
 })
-export class SectorComponent implements OnInit {
+export class SectorComponent implements OnInit,AfterViewInit {
   //bdata:Data[];
   sectorArray:Sector[]=[]; 
-  mybarchart:bar_chart;
   constructor(private sect:SectorServiceService) { 
     this.setShow();
-    this.mybarchart=new bar_chart(this.barChartLabels,this.barChartData);
   } 
   
   ngOnInit(): void {
@@ -33,43 +38,66 @@ export class SectorComponent implements OnInit {
   show_all=false;
   pieChart:pie_chart;
   setShow(){
-    for(let i=0;i<6;i++){
+    for(let i=0;i<sector.length;i++){
       this.show.push(false);
     }
   }
+  showAll(){
+    for (let entry of this.show){
+      if (entry==false){
+        return false;
+      }
+    }
+    return true;
+  }
   getDetails(){
     for (let idx in sector){
-      let entry=sector[idx];
-      let num:Number=+idx+2;
-      console.log(num,entry);
+      let entry=sector[idx];      
       this.sect.getSector(entry).subscribe((data) => {
-        //console.log(data);
-        let newSector:Sector;
-        newSector=data;
-        this.sectorArray.push(newSector);
+        let tempSector=new Sector();
+        tempSector.id=data.id; 
+        tempSector.avgStat=data.avgStat;
+        tempSector.datasource=data.datasource;        
+        this.sectorArray.push(tempSector);
         this.show[idx]=true;
-        console.log(newSector.avgStat);
+        console.log(tempSector);
+        
       });
     }
   }
   getAll(){
     this.sect.getAll().subscribe((data)=>{
-      console.log(data);
       this.pieChart=new pie_chart(data.labels,data.data);
       this.show_all=true;
     })
   }
 
-  //table
-  public barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartData = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Volume'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Price'}
-  ];
+  //table  
   displayedColumns=['ID','Company','YearOfInception'];
   displayedColumns2=['parameter','value'];
+
+  ngAfterViewInit() {
+    
+  }
 
   
   
 
 }
+// newSector.priceChart=new LineChart();
+//         newSector.volumeChart=new LineChart();
+//         let tempdata:DataPoint[]=[];
+//         let tempdata1:DataPoint[]=[];
+//         console.log('Hello!');
+//       for( let point of data.datapoint){
+//         let temp=new DataPoint();
+//           temp.x=new Date(point.year,point.month,point.day);
+//           temp.y=point.price;
+//           tempdata.push(temp);
+//           temp.y=point.volume;
+//           tempdata1.push(temp);
+//       }
+//         newSector.priceChart.pushData(tempdata,data.id,'spline');
+//         newSector.volumeChart.pushData(tempdata1,data.id);
+//         newSector.priceChart.containerName='ChartP'+data.id;
+//         newSector.volumeChart.containerName='ChartV'+data.id;
