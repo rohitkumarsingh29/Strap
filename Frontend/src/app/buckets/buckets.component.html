@@ -92,7 +92,7 @@
       <mat-label>Qty</mat-label>
       <input type="number" min="0" matInput [(ngModel)]="selectedQty" name="stock-qty">
     </mat-form-field>
-    <button mat-raised-button class="btn btn-dark" (click)="add_to_list()">Add</button>
+    <button mat-raised-button class="btn btn-dark" (click)="add_to_list()"><mat-icon>add</mat-icon> Add</button>
     <button mat-raised-button *ngIf="newBucket.bucketList.length>0" class="btn-success btn-block" (click)="submitBucket()"> Submit</button>
   </form>
 </div>

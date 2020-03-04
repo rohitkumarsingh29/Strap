@@ -40,8 +40,12 @@ export class BucketService {
     return this.http.get(endpoint+'price').pipe(map(this.extractData));
   }
   addShareList(sharelist):Observable<any>{
-    return this.http.post<any>(endpoint+'price', JSON.stringify(sharelist), httpOptions).pipe(
+    return this.http.post<any>('http://localhost:5000/trade/buy', JSON.stringify(sharelist), httpOptions).pipe(
       tap((product) => console.log(`added Share List w/ id=${sharelist.length}`))      
     );
+  }
+
+  getShareList():Observable<any>{
+    return this.http.get('http://localhost:5000/trade/sell').pipe(map(this.extractData));
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { BucketTable } from '../CLasses/bucket-table';
 import { BucketService } from '../services/bucket.service';
@@ -28,18 +28,23 @@ export class TradeComponent implements OnInit {
   options: string[] = [];
   filteredOptions: Observable<string[]>;
   datS: MatTableDataSource<BucketTable>;
+  dataSourceSell:MatTableDataSource<BucketTable>;
   currentShareList:BucketTable[]=[];
   newShareList:BucketTable[]=[];
   displayedCol=['ID','Quantity','Price'];
+  displayedColumns=['ID','Company','Quantity','Option'];
+
   priceList:CompanyPrice[]=[];  
 
   constructor(private buck:BucketService,private _snackBar: MatSnackBar) {    
     this.datS=new MatTableDataSource(this.newShareList);
+    this.dataSourceSell=new MatTableDataSource(this.currentShareList);
   }
 
   ngOnInit(): void {
     this.fillPrice();
     this.getCompany();
+    this.getStocks();
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -55,7 +60,6 @@ export class TradeComponent implements OnInit {
       for(let entry of data){
         this.priceList.push(entry);
       }
-      console.log(this.priceList);
     })
   }
   private binarySearch(l:number,r:number,val:string){
@@ -74,7 +78,6 @@ export class TradeComponent implements OnInit {
   getCompany(){
     this.buck.getCompany().subscribe((data)=>{
       this.options=data.companies;
-      console.log(this.options);
     })
   }
   CalCost(elem){
@@ -101,7 +104,26 @@ export class TradeComponent implements OnInit {
       this.datS=new MatTableDataSource(this.newShareList);
     })
   }
+
+  getStocks(){
+    this.buck.getShareList().subscribe((data)=>{
+      for(let entry of data){
+      this.currentShareList.push(entry);
+      }
+      console.log(this.currentShareList);
+      this.dataSourceSell=new MatTableDataSource(this.currentShareList);
+    })
+  }
+  SellStock(idx){
+    console.log(idx,this.currentShareList[idx]);
+    this.qtySell=this.currentShareList[idx].qty;
+    this.stockSell=this.currentShareList[idx].id;
+    this.showStockSell=true;
+  }
   selectedStock='';
   selectedQty=0;
+  showStockSell=false;
+  qtySell=0;
+  stockSell='';
 
 }
