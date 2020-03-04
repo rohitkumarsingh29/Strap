@@ -74,6 +74,8 @@ export class ProfileComponent implements OnInit {
       console.log(data);
       this.companyData=data;
       this.dataSource=new MatTableDataSource(this.companyData);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     })
   }
 }
