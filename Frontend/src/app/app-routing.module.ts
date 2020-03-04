@@ -13,15 +13,15 @@ import { LinegraphComponent } from './components/linegraph/linegraph.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full',},
-  { path: 'home', component: HomeComponent},
+  { path: 'home', component: HomeComponent,canActivate:[AuthGuardService]},
   { path: 'about', component: AboutusComponent,canActivate:[AuthGuardService] },
-  { path: 'profile', component: ProfileComponent},
-  { path: 'sector', component: SectorComponent },
-  { path: 'trends', component: BucketsComponent },
-  { path: 'analytics', component: AnalyticsComponent },
+  { path: 'profile', component: ProfileComponent,canActivate:[AuthGuardService]},
+  { path: 'sector', component: SectorComponent,canActivate:[AuthGuardService] },
+  { path: 'trends', component: BucketsComponent,canActivate:[AuthGuardService] },
+  { path: 'analytics', component: AnalyticsComponent,canActivate:[AuthGuardService] },
   {path: 'login',component:LoginComponent},
-  {path:'trade', component:TradeComponent},
-  {path:'linegraph/:sec', component:LinegraphComponent}
+  {path:'trade', component:TradeComponent,canActivate:[AuthGuardService]},
+  {path:'linegraph/:sec', component:LinegraphComponent,canActivate:[AuthGuardService]}
   
 ];
 

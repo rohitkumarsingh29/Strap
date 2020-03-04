@@ -40,7 +40,7 @@
             <input type="password" #pwdAgain="ngModel" required class="form-control infield" [class.is-invalid]="(password!=passwordAgain)&&pwdAgain.touched" name="pwdAgain" [(ngModel)]="passwordAgain">
             <small class="text-danger" [class.d-none]=" (password==passwordAgain)|| pwdAgain.untouched">Password Doesn't Match</small>
         </div>          
-        <a class="submit">Sign up</a>
+        <a class="submit" (click)="AddUser()">Sign up</a>
     </form>
     <p class="forgot">Already a member?</p>
     <button mat-stroked-button color="primary" (click)="onClick()">Sign in</button>

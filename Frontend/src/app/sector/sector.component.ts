@@ -3,7 +3,7 @@ import {Data,bar_chart,pie_chart, LineChart, DataPoint} from '../graphs/graph';
 import { SectorServiceService } from '../services/sector-service.service';
 import { AvgStat } from '../CLasses/avg-stat';
 
-const sector=["technology","healthcare12"];
+const sector=['Public Utilities','Basic Industries','Consumer Durables','Miscellaneous','Technology','Health Care','Energy','Finance','Consumer Services','Transportation','Capital Goods','Consumer Non-Durables'];
 export class Sector{
   id:String;  
   datasource:any[];

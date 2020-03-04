@@ -14,7 +14,7 @@
     background-size: cover;
   }
   .long-card{
-    min-width: 1050px;
+    width: 1050px;
     /* max-width: 1000px; */
     /* padding: 30px; */
     margin-top: 4px;

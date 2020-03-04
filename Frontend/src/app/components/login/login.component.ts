@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-
+export interface userNew{
+  name:string;
+  username:string;
+  password:string;
+}
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -28,12 +32,26 @@ export class LoginComponent implements OnInit {
       console.log(data);
       if (data.msg){
         this.auth.isLoggedIn=true;
-        this.router.navigate(['/'])
-        
+        this.router.navigate(['/']);        
       }
       else{
         this.auth.isLoggedIn=false;
 
+      }
+    })
+  }
+  AddUser(){
+    let user:userNew={name:this.Name,username:this.username,password:this.password};
+    this.auth.addUser(user).subscribe((data)=>{
+      console.log(data);
+      if (data.status){
+        this.auth.isLoggedIn=true;
+        this.router.navigate(['/']);
+      }
+      else{
+        this.auth.isLoggedIn=false;
+        this.password="";
+        this.passwordAgain="";
       }
     })
   }

@@ -49,5 +49,10 @@ export class AuthService {
       tap((product) => console.log(`added product w/ id=${product.sector}`))
     );
   }
+  addUser(user):Observable<any>{
+    return this.http.post<any>(endpoint + 'signup', JSON.stringify(user), httpOptions).pipe(
+      tap((product) => console.log(`added product w/ id=${product.id}`))
+    );
+  }
 
 }
