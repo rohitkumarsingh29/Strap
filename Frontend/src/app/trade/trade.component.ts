@@ -7,12 +7,15 @@ import { BucketService } from '../services/bucket.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Bucket } from '../CLasses/bucket';
 import { startWith, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 export class CompanyPrice{
   id:string;
   price:number;
+  name:string;
   constructor(){
     this.id='';
+    this.name='';
     this.price=0;
   }
 }
@@ -36,7 +39,7 @@ export class TradeComponent implements OnInit {
 
   priceList:CompanyPrice[]=[];  
 
-  constructor(private buck:BucketService,private _snackBar: MatSnackBar) {    
+  constructor(private buck:BucketService,private _snackBar: MatSnackBar,public router:Router) {    
     this.datS=new MatTableDataSource(this.newShareList);
     this.dataSourceSell=new MatTableDataSource(this.currentShareList);
   }
@@ -58,6 +61,10 @@ export class TradeComponent implements OnInit {
   fillPrice(){
     this.buck.getPrice().subscribe((data)=>{
       for(let entry of data){
+        let temp=new CompanyPrice;
+        temp.id=data.id;
+        temp.price=data.price;
+        // temp.name=data.name;
         this.priceList.push(entry);
       }
     })
@@ -102,6 +109,7 @@ export class TradeComponent implements OnInit {
       console.log(data);
       this.newShareList=[];
       this.datS=new MatTableDataSource(this.newShareList);
+      this.router.navigate(['\home']);
     })
   }
 
