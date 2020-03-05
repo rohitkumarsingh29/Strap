@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
   }
   getChart(){
     this.buck.plot().subscribe((data)=>{
+      console.log('Get Chart',data);
       for (let entry of data){
         console.log(entry);
         let tempdata:DataPoint[]=[];
