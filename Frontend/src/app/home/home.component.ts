@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getStock();
     this.getChart();
+    this.getUserDetails();
         
   }
   datasource=new MatTableDataSource(dataSource);
