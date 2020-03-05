@@ -38,7 +38,7 @@ export class AuthService {
     );
   }
   logout():Observable<any>{
-    this.isLoggedIn=false;
+    // this.isLoggedIn=false;
     let a=this.http.get(endpoint+'logout').pipe(map(this.extractData));
     return a;
   }  

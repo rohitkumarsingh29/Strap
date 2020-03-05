@@ -15,6 +15,7 @@ export class AppComponent {
     this.auth.logout().subscribe((data)=>{
       if (data.msg){
         console.log('logging out');
+        this.auth.isLoggedIn=false;
         this.router.navigate(['/login']);
       }
       else{
