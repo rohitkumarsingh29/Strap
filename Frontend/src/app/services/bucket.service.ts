@@ -56,4 +56,5 @@ export class BucketService {
   plot():Observable<any>{
     return this.http.get(endpoint+'plot').pipe(map(this.extractData));
   }
+  
 }
