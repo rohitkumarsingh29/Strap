@@ -12,6 +12,10 @@ const dataSource=[
   {parameter:"Balance",value:"$-100000"},
   {parameter:"Number of Transactions",value:"1000"},
 ];
+export interface UserDetail{
+  parameter:string;
+  value:string;
+}
 
 
 @Component({
@@ -22,11 +26,13 @@ const dataSource=[
 export class HomeComponent implements OnInit {
   mylinechart:LineChart;
   ds:MatTableDataSource<BucketTable>;
-
+  datasource:MatTableDataSource<UserDetail>;
   constructor(public buck:BucketService,public auth:AuthService) { 
     this.ds=new MatTableDataSource(this.datasource2);
+    this.datasource=new MatTableDataSource(dataSource);
     this.mylinechart=new LineChart();
   }
+  LogName:String='';
 
   ngOnInit(): void {
     this.getStock();
@@ -34,7 +40,6 @@ export class HomeComponent implements OnInit {
     this.getUserDetails();
         
   }
-  datasource=new MatTableDataSource(dataSource);
   dispcol=['parameter','value']; 
   datasource2:BucketTable[]=[];  
   displayedColumns=['ID','Company','Quantity'];
@@ -67,11 +72,14 @@ export class HomeComponent implements OnInit {
     
   }
   getUserDetails(){
+    console.log("Fetching Userdetails");
     this.auth.getUser().subscribe((data)=>{
       let ds_local=[];
       console.log("UserDetails",data);
+      
       for(let entry of data.datasource){
-        ds_local.push(entry);        
+        ds_local.push(entry);   
+        if(entry.parameter=="Name") this.LogName=entry.value;     
       }
       this.datasource=new MatTableDataSource(ds_local);
     })
