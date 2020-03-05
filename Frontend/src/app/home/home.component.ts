@@ -3,6 +3,7 @@ import {Data,DataPoint,bar_chart,pie_chart, LineChart} from '../graphs/graph';
 import { BucketService } from '../services/bucket.service';
 import { BucketTable } from '../CLasses/bucket-table';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from '../services/auth.service';
 
 const dataSource=[
   {parameter:"Username",value:"brucewain"},
@@ -21,7 +22,8 @@ const dataSource=[
 export class HomeComponent implements OnInit {
   mylinechart:LineChart;
   ds:MatTableDataSource<BucketTable>;
-  constructor(public buck:BucketService) { 
+
+  constructor(public buck:BucketService,public auth:AuthService) { 
     this.ds=new MatTableDataSource(this.datasource2);
     this.mylinechart=new LineChart();
   }
@@ -31,7 +33,7 @@ export class HomeComponent implements OnInit {
     this.getChart();
         
   }
-  datasource=dataSource;
+  datasource=new MatTableDataSource(dataSource);
   dispcol=['parameter','value']; 
   datasource2:BucketTable[]=[];  
   displayedColumns=['ID','Company','Quantity'];
@@ -62,6 +64,15 @@ export class HomeComponent implements OnInit {
       this.mylinechart.createChart();
     })
     
+  }
+  getUserDetails(){
+    this.auth.getUser().subscribe((data)=>{
+      let ds_local=[];
+      for(let entry of data.datasource){
+        ds_local.push(entry);        
+      }
+      this.datasource=new MatTableDataSource(ds_local);
+    })
   }
 
 }

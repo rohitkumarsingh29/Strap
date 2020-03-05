@@ -26,9 +26,9 @@ export class LoginComponent implements OnInit {
   onClick(){
     this.show=!this.show;
   }
-  user={username:this.username,password:this.password};
   Login(){
-    this.auth.login(this.user).subscribe((data)=>{
+    let user={username:this.username,password:this.password};
+    this.auth.login(user).subscribe((data)=>{
       console.log(data);
       if (data.msg){
         this.auth.isLoggedIn=true;
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     })
   }
   AddUser(){
-    let user:userNew={name:this.Name,username:this.username,password:this.password};
+    let user={name:this.Name,username:this.username,password:this.password}
     this.auth.addUser(user).subscribe((data)=>{
       console.log(data);
       if (data.status){

@@ -24,7 +24,7 @@ export class AnalyticsComponent implements OnInit {
   years:number[]=[];
   months:number[]=[];
   days:number[]=[];
-  sectors=['technology','healthcare'];
+  sectors=['Public Utilities','Basic Industries','Consumer Durables','Miscellaneous','Technology','Health Care','Energy','Finance','Consumer Services','Transportation','Capital Goods','Consumer Non-Durables'];  
   yearSelected:number=-1;
   monthSelected:number=-1;
   daySelected:number=-1;
@@ -80,7 +80,7 @@ export class AnalyticsComponent implements OnInit {
     }
   }
   dataSource=[];
-  displayedColumns=['ID','Company','YearOfInception'];
+  displayedColumns=['ID','Company'];
   submitDate(){   
     let p:product={day:this.daySelected,month:this.monthSelected,year:this.yearSelected,sector:this.sectorSelected};    
     this.auth.addProduct(p).subscribe((result)=>{

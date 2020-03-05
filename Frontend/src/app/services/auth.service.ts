@@ -54,5 +54,8 @@ export class AuthService {
       tap((product) => console.log(`added product w/ id=${product.id}`))
     );
   }
+  getUser():Observable<any>{
+    return this.http.get(endpoint+'userdetails').pipe(map(this.extractData));    
+  }
 
 }

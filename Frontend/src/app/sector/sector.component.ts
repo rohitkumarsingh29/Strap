@@ -73,7 +73,7 @@ export class SectorComponent implements OnInit,AfterViewInit {
   }
 
   //table  
-  displayedColumns=['ID','Company','YearOfInception'];
+  displayedColumns=['ID','Company'];
   displayedColumns2=['parameter','value'];
 
   ngAfterViewInit() {

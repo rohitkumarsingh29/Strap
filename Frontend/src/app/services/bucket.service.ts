@@ -28,7 +28,7 @@ export class BucketService {
   }
   addBucket (product): Observable<any> {
     console.log(product);
-    return this.http.post<any>(endpoint, JSON.stringify(product), httpOptions).pipe(
+    return this.http.post<any>(endpoint+'add', JSON.stringify(product), httpOptions).pipe(
       tap((product) => console.log(`added bucket w/ id=${product.id}`))      
     );
   }
