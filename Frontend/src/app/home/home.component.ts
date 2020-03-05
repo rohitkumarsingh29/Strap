@@ -69,6 +69,7 @@ export class HomeComponent implements OnInit {
   getUserDetails(){
     this.auth.getUser().subscribe((data)=>{
       let ds_local=[];
+      console.log("UserDetails",data);
       for(let entry of data.datasource){
         ds_local.push(entry);        
       }

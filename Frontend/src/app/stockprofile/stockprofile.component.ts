@@ -86,13 +86,13 @@ export class StockprofileComponent implements OnInit {
     let l=p.length;
 
     this.gP5.pushData(tempData.slice((l-5)>0?(l-5):0,l));
-    this.gPM.pushData(tempData.slice((l-30)>0?(l-5):0,l));
-    this.gPY.pushData(tempData.slice((l-365)>0?(l-5):0,l));
-    this.gPA.pushData(tempData.slice((l-l)>0?(l-5):0,l));
+    this.gPM.pushData(tempData.slice((l-30)>0?(l-30):0,l));
+    this.gPY.pushData(tempData.slice((l-365)>0?(l-365):0,l));
+    this.gPA.pushData(tempData.slice(0,l));
     this.gV5.pushData(volData.slice((l-5)>0?(l-5):0,l));
-    this.gVM.pushData(volData.slice((l-30)>0?(l-5):0,l));
-    this.gVY.pushData(volData.slice((l-365)>0?(l-5):0,l));
-    this.gVA.pushData(volData.slice((l-l)>0?(l-5):0,l));
+    this.gVM.pushData(volData.slice((l-30)>0?(l-30):0,l));
+    this.gVY.pushData(volData.slice((l-365)>0?(l-365):0,l));
+    this.gVA.pushData(volData.slice((l-l)>0?(l-l):0,l));
     
     this.gP5.containerName="Cgp5";
     this.gPM.containerName="CgpM";
